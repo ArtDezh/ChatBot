@@ -22,6 +22,28 @@ public class ChatBoot extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(START_LOATION, START_LOATION, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+        // место для диалога
+        dialogue = new JTextArea();
+        dialogue.setLineWrap(true); // перенос строк
+        JScrollPane scrollBar = new JScrollPane(dialogue);
+
+        // создаем место для размещения элементов(кнопки, чек-бокс, поле для текста)
+        JPanel bp = new JPanel();
+        bp.setLayout(new BoxLayout(bp, BoxLayout.X_AXIS));
+        ai = new JCheckBox("AI");
+        //ai.doClick();
+        message = new JTextField();
+        //message.addActionListener(this);
+        JButton enter = new JButton("Enter");
+        //enter.addActionListener(this);
+
+        // добавить все элементы на окно программы
+        bp.add(ai);
+        bp.add(message);
+        bp.add(enter);
+
+        add(BorderLayout.SOUTH, bp);
+        add(BorderLayout.CENTER, scrollBar);
         setVisible(true);
     }
 }
