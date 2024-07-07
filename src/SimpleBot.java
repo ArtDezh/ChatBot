@@ -1,7 +1,4 @@
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class SimpleBot {
@@ -30,7 +27,7 @@ public class SimpleBot {
             "Зачем Вам такая информация?",
             "Давайте сохраним интригу?"};
 
-    final Map<String, String> PATTERNS_FOR_BOT = new HashMap<String, String>() {{
+    final Map<String, String> PATTERNS_FOR_BOT = new HashMap<>() {{
         //прветствие
         put("хай", "hello");
         put("привет", "hello");
@@ -80,7 +77,7 @@ public class SimpleBot {
         put("до\\s.*свидания", "bye");
     }};
 
-    final Map<String, String> ANSWERS_BY_PATTERNS = new HashMap<String, String>(){{
+    final Map<String, String> ANSWERS_BY_PATTERNS = new HashMap<>() {{
         put("hello", "Здравствуйте, рад Вас видеть.");
         put("who", "Я обычный чат.");
         put("name", "Зовите меня Ботик.");
@@ -105,7 +102,7 @@ public class SimpleBot {
                 COMMON_PHRASES[random.nextInt(COMMON_PHRASES.length)];
         if (ai) {
             String message = String.join(" ", msg.toLowerCase().split("[ (,!.)?]+"));
-            for (Map.Entry<String,String> o: PATTERNS_FOR_BOT.entrySet()) {
+            for (Map.Entry<String, String> o : PATTERNS_FOR_BOT.entrySet()) {
                 pattern = Pattern.compile(o.getKey());
                 if (pattern.matcher(message).find())
                     if (o.getValue().equals("whattime")) return date.toString();
