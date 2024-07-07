@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ChatBoot extends JFrame implements ActionListener {
-    final String TITLE_OF_PROGRAM = "Simple ChatBot";
+    final String TITLE_OF_PROGRAM = "Simple_ChatBot";
     final int START_LOATION = 200;
     final int WINDOW_WIDTH = 350;
     final int WINDOW_HEIGHT = 450;
@@ -11,7 +11,7 @@ public class ChatBoot extends JFrame implements ActionListener {
     JTextArea dialogue; //место для диалога
     JCheckBox ai; // пдключить ai
     JTextField message; // поле для ввода сообщения
-    //SimpleBot sbot;
+    SimpleBot sbot;
 
     public static void main(String[] args) {
         new ChatBoot();
@@ -45,12 +45,15 @@ public class ChatBoot extends JFrame implements ActionListener {
         add(BorderLayout.SOUTH, bp);
         add(BorderLayout.CENTER, scrollBar);
         setVisible(true);
+        sbot = new SimpleBot(); // создали бота
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (message.getText().trim().length() > 0) {
             dialogue.append(message.getText() + "\n");
+            dialogue.append(TITLE_OF_PROGRAM.substring(0, 14) + ": " +
+                    sbot.sayInReturn(message.getText(), ai.isSelected()) + "\n");
         }
         message.setText("");
         message.requestFocusInWindow();
