@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ChatBoot extends JFrame {
+public class ChatBoot extends JFrame implements ActionListener {
     final String TITLE_OF_PROGRAM = "Simple ChatBot";
     final int START_LOATION = 200;
     final int WINDOW_WIDTH = 350;
@@ -33,9 +33,9 @@ public class ChatBoot extends JFrame {
         ai = new JCheckBox("AI");
         //ai.doClick();
         message = new JTextField();
-        //message.addActionListener(this);
+        message.addActionListener(this); // возможность нажать "Enter" на клавиатуре
         JButton enter = new JButton("Enter");
-        //enter.addActionListener(this);
+        enter.addActionListener(this);
 
         // добавить все элементы на окно программы
         bp.add(ai);
@@ -45,5 +45,14 @@ public class ChatBoot extends JFrame {
         add(BorderLayout.SOUTH, bp);
         add(BorderLayout.CENTER, scrollBar);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (message.getText().trim().length() > 0) {
+            dialogue.append(message.getText() + "\n");
+        }
+        message.setText("");
+        message.requestFocusInWindow();
     }
 }
